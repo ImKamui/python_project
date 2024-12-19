@@ -1,0 +1,11 @@
+geopi
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+beautifulsoup4
+requests
+aiogram
+alembic
+python-dotenv
+asyncio

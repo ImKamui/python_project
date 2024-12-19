@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    container_name: afisha_db
+    environment:
+      POSTGRES_USER: mariawasnotfound
+      POSTGRES_PASSWORD: 0000
+      POSTGRES_DB: afisha_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
+
+  bot:
+    build: .
+    container_name: nearby_events_bot
+    environment:
+      BOT_TOKEN: "7947881343:AAFwarC1O2Mr8nBsGSp50r1VbYyNDJWc9BU"
+      DATABASE_URL: postgresql://mariawasnotfound:0000@db:5432/afisha_db
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    command: ["python3", "bot.py"]
+
+volumes:
+  postgres_data:
+
